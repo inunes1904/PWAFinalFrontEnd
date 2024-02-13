@@ -8,24 +8,7 @@ export default {
     return {
       lastFetch: null,
       coaches: [
-        {
-          id: 'c1',
-          firstName: 'Ivo',
-          lastName: 'Nunes',
-          areas: ['frontend', 'backend', 'career'],
-          description:
-            "I'm Ivo Nunes!",
-          hourlyRate: 34
-        },
-        {
-          id: 'c2',
-          firstName: 'Ruben',
-          lastName: 'Nunes',
-          areas: [ 'career'],
-          description:
-            'I am Ruben Nunes.',
-          hourlyRate: 35
-        }
+       
       ]
     };
   },

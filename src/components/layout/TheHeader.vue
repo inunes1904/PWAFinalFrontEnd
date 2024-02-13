@@ -1,12 +1,13 @@
 <template>
   <header>
     <nav>
+      
       <h1>
-        <router-link to="/">Find a Coach</router-link>
+        <router-link to="/"><img  src="coach.png"/> Find Coach</router-link>
       </h1>
       <ul>
         <li>
-          <router-link to="/coaches">All Coaches</router-link>
+          <router-link to="/coaches">Coaches</router-link>
         </li>
         <li>
           <router-link to="/requests">Requests</router-link>
@@ -17,6 +18,14 @@
 </template>
 
 <style scoped>
+
+img{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+
+}
+
 header {
   width: 100%;
   height: 5rem;

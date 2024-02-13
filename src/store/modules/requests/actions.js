@@ -4,8 +4,11 @@ export default {
       userEmail: payload.email,
       message: payload.message
     };
-    const response = await fetch(`https://vue-http-demo-85e9e.firebaseio.com/requests/${payload.coachId}.json`, {
+    const response = await fetch(`https://find-coach-pwa-backend.onrender.com/api/request/${payload.coachId}`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(newRequest)
     });
 
@@ -23,7 +26,7 @@ export default {
   },
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
-    const response = await fetch(`https://vue-http-demo-85e9e.firebaseio.com/requests/${coachId}.json`);
+    const response = await fetch(`https://find-coach-pwa-backend.onrender.com/api/request`);
     const responseData = await response.json();
 
     if (!response.ok) {

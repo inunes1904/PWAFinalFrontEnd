@@ -3,14 +3,14 @@
     <section>
       <base-card>
         <h2>{{ fullName }}</h2>
-        <h3>${{ rate }}/hour</h3>
+        <h3>€{{ rate }}/hour</h3>
       </base-card>
     </section>
     <section>
       <base-card>
         <header>
           <h2>Interested? Reach out now!</h2>
-          <base-button link :to="contactLink">Contact</base-button>
+          <base-button link :to="contactLink" v-if="checkIfButtonIsNeeded">Contact</base-button>
         </header>
         <router-view></router-view>
       </base-card>
@@ -46,8 +46,17 @@ export default {
       return this.selectedCoach.description;
     },
     contactLink() {
-      return this.$route.path + '/' + this.id + '/contact';
+      if (this.$route.path === '/coaches') {
+        return this.$route.path + '/' + this.id + '/contact';
+      }
+      return this.$route.path + '/contact';
     },
+    checkIfButtonIsNeeded(){
+      if(!this.$route.path.toString().endsWith('/contact')){
+        return true;
+      }
+      return false;
+    }
   },
   created() {
     this.selectedCoach = this.$store.getters['coaches/coaches'].find(

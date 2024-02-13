@@ -70,4 +70,10 @@ button:active {
 .outline:active {
   background-color: #edd2ff;
 }
+
+.delete {
+  background-color: transparent;
+  border-color: #410000;
+  color: rgb(177, 0, 0);
+}
 </style>

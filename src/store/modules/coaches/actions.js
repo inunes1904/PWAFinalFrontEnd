@@ -10,14 +10,15 @@ export default {
     };
 
     const response = await fetch(
-      `https://vue-http-demo-85e9e.firebaseio.com/coaches/${userId}.json`,
+      `https://find-coach-pwa-backend.onrender.com/api/coach`,
       {
-        method: 'PUT',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(coachData)
       }
     );
-
-    // const responseData = await response.json();
 
     if (!response.ok) {
       // error ...
@@ -27,6 +28,7 @@ export default {
       ...coachData,
       id: userId
     });
+    window.location.reload();
   },
   async loadCoaches(context, payload) {
     if (!payload.forceRefresh && !context.getters.shouldUpdate) {
@@ -34,7 +36,7 @@ export default {
     }
 
     const response = await fetch(
-      `https://vue-http-demo-85e9e.firebaseio.com/coaches.json`
+      `https://find-coach-pwa-backend.onrender.com/api/coach`
     );
     const responseData = await response.json();
 
@@ -48,6 +50,7 @@ export default {
     for (const key in responseData) {
       const coach = {
         id: key,
+        _id: responseData[key]._id,
         firstName: responseData[key].firstName,
         lastName: responseData[key].lastName,
         description: responseData[key].description,
@@ -55,9 +58,31 @@ export default {
         areas: responseData[key].areas
       };
       coaches.push(coach);
+      console.log(coach);
     }
 
     context.commit('setCoaches', coaches);
     context.commit('setFetchTimestamp');
-  }
+  },
+  async deleteCoach(context, id) {
+    var response = await fetch(
+      `https://find-coach-pwa-backend.onrender.com/api/coach/${id}`,
+      {
+        method: 'DELETE'
+      }
+    );
+
+    if (!response.ok) {
+      // error ...
+    console.log(response);
+    }
+    context.commit('setFetchTimestamp');
+    // Reload Location
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
+    
+  },
+
 };
+

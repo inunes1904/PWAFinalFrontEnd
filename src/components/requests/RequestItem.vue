@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <li v-if="message !== '' || email !== ''">
     <div>
       <a :href="emailLink">{{ email }}</a>
     </div>

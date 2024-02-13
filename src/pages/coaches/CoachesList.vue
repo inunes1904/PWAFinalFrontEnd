@@ -20,6 +20,7 @@
             v-for="coach in filteredCoaches"
             :key="coach.id"
             :id="coach.id"
+            :_id="coach._id"
             :first-name="coach.firstName"
             :last-name="coach.lastName"
             :rate="coach.hourlyRate"

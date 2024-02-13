@@ -1,11 +1,12 @@
 <template>
   <li>
     <h3>{{ fullName }}</h3>
-    <h4>${{ rate }}/hour</h4>
+    <h4>€{{ rate }}/hour</h4>
     <div>
       <base-badge v-for="area in areas" :key="area" :type="area" :title="area"></base-badge>
     </div>
     <div class="actions">
+      <base-button class="delete-btn" @click="deleteCoachBtn" >Delete</base-button>
       <base-button mode="outline" link :to="coachContactLink">Contact</base-button>
       <base-button link :to="coachDetailsLink">View Details</base-button>
     </div>
@@ -14,18 +15,25 @@
 
 <script>
 export default {
-  props: ['id', 'firstName', 'lastName', 'rate', 'areas'],
+  props: ['id', 'firstName', 'lastName', 'rate', 'areas', '_id'],
   computed: {
     fullName() {
       return this.firstName + ' ' + this.lastName;
     },
     coachContactLink() {
-      return this.$route.path + '/' + this.id + '/contact'; // /coaches/c1/contact
+      return this.$route.path + '/' + this.id + '/contact'; 
     },
     coachDetailsLink() {
-      return this.$route.path + '/' + this.id; // /coaches/c1
-    },
+      return this.$route.path + '/' + this.id; 
+    }
+
   },
+  methods : {
+    deleteCoachBtn() {
+      this.$store.dispatch('coaches/deleteCoach', this._id);
+      this.$router.push('/');
+    }
+  }
 };
 </script>
 
@@ -53,5 +61,15 @@ div {
 .actions {
   display: flex;
   justify-content: flex-end;
+}
+
+.delete-btn {
+  background-color: #fc7e7e;
+  color: white;
+  border-color: #920000;
+}
+.delete-btn:hover{
+  background-color:  #920000;
+  border-color: #920000;
 }
 </style>
